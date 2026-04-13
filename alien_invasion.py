@@ -11,9 +11,11 @@ from setting import Settings
 from ship import Ship
 from arsenal import Arsenal 
 
+"""Main class to manage the Alien Invasion game, screen, and loop."""
 class AlienInvasion:
-
+ 
     def __init__(self):
+        """Initializes the game, screen, settings, sound, and ship."""
         pygame.init()
         self.settings = Settings()
         
@@ -25,8 +27,6 @@ class AlienInvasion:
         self.bg = pygame.transform.scale(self.bg, (self.settings.screen_w, self.settings.screen_h))
 
 
-
-    
         self.running = True
         self.clock = pygame.time.Clock()
 
@@ -41,7 +41,7 @@ class AlienInvasion:
 
 
     def run_game(self):
-        # Game loop
+        """Start and maintains main game loop."""
         while self.running:
             self._check_events()
             self.ship.update()
@@ -50,12 +50,14 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _update_screen(self):
+        """Redraw the background, ship, and bullets each frame."""
         self.screen.blit(self.bg, (0, 0))       
         self.ship.draw()
         self.ship.arsenal.draw_arsenal()
         pygame.display.flip()
 
     def _check_events(self):
+        """Listen for and respond to keyboard and window events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -69,6 +71,7 @@ class AlienInvasion:
                 self._check_keyup_events(event)
 
     def _check_keydown_events(self, event):
+        """Handle key press events for ship movement and firing."""
         if event.key == pygame.K_UP:
             self.ship.moving_up = True
         elif event.key == pygame.K_DOWN:
@@ -83,6 +86,7 @@ class AlienInvasion:
                 self.laser_sound.fadeout(250)
 
     def _check_keyup_events(self, event):
+        """Handle key release events to stop ship movement."""
         if event.key == pygame.K_UP:
             self.ship.moving_up = False
         elif event.key == pygame.K_DOWN:

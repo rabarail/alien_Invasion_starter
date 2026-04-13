@@ -1,8 +1,11 @@
 from pathlib import Path
-class Settings:
-    
+
+"""Stores all settings for the Alien Invasion game."""
+class Settings: 
 
     def __init__(self):
+        """Initialize the game settings with default values."""
+        
         self.name: str = 'Alien Invasion'
         self.screen_w = 1200
         self.screen_h = 800

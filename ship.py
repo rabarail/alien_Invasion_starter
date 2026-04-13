@@ -5,6 +5,8 @@ if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
     from arsenal import Arsenal
 
+"""Represents the player ship on the left edge of the screen.
+The ship moves in all 4 directions and fires horizontal laser bullets."""
 class Ship:
 
     def __init__(self, game:'AlienInvasion', arsenal: 'Arsenal'):
@@ -36,7 +38,7 @@ class Ship:
 
 
     def update(self):
-        #updating the position of the ship 
+        """Update ship position in all 4 directions each frame."""
         self.arsenal.update_arsenal()
 
         if self.moving_up and self.rect.top > self.boundaries.top:
@@ -52,6 +54,7 @@ class Ship:
         self.rect.x = self.x
 
     def draw(self):
+        """Draw the ship and bullets to the screen."""
         self.arsenal.draw_arsenal()
         self.screen.blit(self.image, self.rect)
 
