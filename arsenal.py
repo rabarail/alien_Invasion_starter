@@ -15,7 +15,9 @@ class Arsenal:
 
     def update_arsenal(self):
         self.arsenal.update()
-        self._remove_bullets_offscreen()
+        for bullet in self.arsenal.copy():
+            if bullet.rect.left > self.game.settings.screen_w: 
+                self.arsenal.remove(bullet)
         
 
 

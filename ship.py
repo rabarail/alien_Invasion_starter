@@ -20,6 +20,7 @@ class Ship:
         self.image = pygame.image.load(self.settings.ship_file)
         self.image = pygame.transform.scale(self.image, 
             (self.settings.ship_w, self.settings.ship_h))
+        self.image = pygame.transform.rotate(self.image, -90)
         
 
 
