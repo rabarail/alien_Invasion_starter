@@ -10,6 +10,14 @@ The ship moves in all 4 directions and fires horizontal laser bullets."""
 class Ship:
 
     def __init__(self, game:'AlienInvasion', arsenal: 'Arsenal'):
+        """Initialize the ship at the mid-left edge of the screen.
+ 
+        Args:
+            game: The main AlienInvasion game instance.
+            arsenal: The Arsenal that manages the ship's bullets.
+        """
+         # Movement flags
+
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -18,7 +26,9 @@ class Ship:
         self.moving_down = False
         self.moving_right = False 
         self.moving_left = False  
-       
+        
+         # Load and transform ship image
+
         self.image = pygame.image.load(self.settings.ship_file)
         self.image = pygame.transform.scale(self.image, 
             (self.settings.ship_w, self.settings.ship_h))
@@ -39,7 +49,6 @@ class Ship:
 
     def update(self):
         """Update ship position in all 4 directions each frame."""
-        self.arsenal.update_arsenal()
 
         if self.moving_up and self.rect.top > self.boundaries.top:
             self.y -= self.settings.ship_speed
@@ -55,11 +64,13 @@ class Ship:
 
     def draw(self):
         """Draw the ship and bullets to the screen."""
-        self.arsenal.draw_arsenal()
         self.screen.blit(self.image, self.rect)
 
     def fire(self):
-        return self.arsenal.fire_bullet()
+         """Attempt to fire a bullet through the arsenal. 
+        Returns: True if a bullet was fired, False if at the limit.
+        """
+         return self.arsenal.fire_bullet()
     
         
         

@@ -14,7 +14,7 @@ from arsenal import Arsenal
 """Main class to manage the Alien Invasion game, screen, and loop."""
 class AlienInvasion:
  
-    def __init__(self):
+    def __init__(self) -> None:
         """Initializes the game, screen, settings, sound, and ship."""
         pygame.init()
         self.settings = Settings()
@@ -39,24 +39,24 @@ class AlienInvasion:
 
 
 
-
-    def run_game(self):
+    def run_game(self) -> None:
         """Start and maintains main game loop."""
         while self.running:
             self._check_events()
             self.ship.update()
-            self._update_screen()
             self.ship.arsenal.update_arsenal() 
+            self._update_screen()
+         
             self.clock.tick(self.settings.FPS)
 
-    def _update_screen(self):
+    def _update_screen(self) -> None:
         """Redraw the background, ship, and bullets each frame."""
         self.screen.blit(self.bg, (0, 0))       
         self.ship.draw()
         self.ship.arsenal.draw_arsenal()
         pygame.display.flip()
 
-    def _check_events(self):
+    def _check_events(self) -> None:
         """Listen for and respond to keyboard and window events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -70,8 +70,11 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
 
-    def _check_keydown_events(self, event):
-        """Handle key press events for ship movement and firing."""
+    def _check_keydown_events(self, event) -> None:
+        """Handle key press events for ship movement and firing.
+         Args:
+        event: The keydown event captured by pygame.
+    """
         if event.key == pygame.K_UP:
             self.ship.moving_up = True
         elif event.key == pygame.K_DOWN:
@@ -85,8 +88,11 @@ class AlienInvasion:
                 self.laser_sound.play()
                 self.laser_sound.fadeout(250)
 
-    def _check_keyup_events(self, event):
-        """Handle key release events to stop ship movement."""
+    def _check_keyup_events(self, event) -> None:
+        """Handle key release events to stop ship movement.
+        Args:
+        event: The keyup event captured by pygame.
+    """
         if event.key == pygame.K_UP:
             self.ship.moving_up = False
         elif event.key == pygame.K_DOWN:

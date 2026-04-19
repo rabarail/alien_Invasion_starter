@@ -7,26 +7,27 @@ if TYPE_CHECKING:
     
 """Manages the collection of bullets fired by the player ship."""
 class Arsenal:
-    def __init__(self, game:'AlienInvasion'):
+    def __init__(self, game:'AlienInvasion') -> None:
+
+        """Initialize the arsenal with an empty bullet group.
+ 
+        Args:
+            game: The main AlienInvasion game instance.
+        """
         self.game = game
         self.settings = game.settings
 
         self.arsenal = pygame.sprite.Group()
 
     def update_arsenal(self):
-        """Update all bullet positions and remove bullets that leave the screen."""
+        """Move all bullets and remove any that have left the screen."""
+        
         self.arsenal.update()
         for bullet in self.arsenal.copy():
             if bullet.rect.left > self.game.settings.screen_w: 
                 self.arsenal.remove(bullet)
         
 
-
-    def _remove_bullets_offscreen(self):
-        """Remove bullets that have gone off the top of the screen and lets you fire 5 amount again."""
-        for bullet in self.arsenal.copy():
-            if bullet.rect.bottom <= 0:
-                self.arsenal.remove(bullet)
             
     def draw_arsenal(self):
         """Draw all active bullets to the screen."""
